@@ -9,8 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProductsService } from '../../shared/services/products.service';
 import { Router } from '@angular/router';
+
+import { ProductsService } from '../../shared/services/products.service';
 
 @Component({
   selector: 'app-create',
