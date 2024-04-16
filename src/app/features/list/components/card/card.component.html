@@ -5,7 +5,12 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-actions>
-    <button mat-button>Editar</button>
+    <button (click)="onEdit.emit()" mat-button>Editar</button>
     <button mat-button>Excluir</button>
   </mat-card-actions>
 </mat-card>
+
+<!--
+  dumb components - não tem funcionalidades
+  apenas recebe e exibe informações
+ -->
