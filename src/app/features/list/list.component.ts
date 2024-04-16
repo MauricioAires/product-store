@@ -26,6 +26,6 @@ export class ListComponent implements OnInit {
   }
 
   onEdit(id: string) {
-    this.router.navigateByUrl(`edit-product/${id}`);
+    this.router.navigate(['edit-product', id]);
   }
 }
