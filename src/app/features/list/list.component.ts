@@ -1,11 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 import { Product } from '../../shared/interfaces/product.interface';
 import { ProductsService } from '../../shared/services/products.service';
 import { CardComponent } from './components/card/card.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -22,6 +27,10 @@ export class ListComponent implements OnInit {
   matDialog = inject(MatDialog);
 
   ngOnInit(): void {
+    this.getAllProducts();
+  }
+
+  getAllProducts(): void {
     this.productsService.getAll().subscribe((res) => {
       this.products = res;
     });
@@ -34,8 +43,21 @@ export class ListComponent implements OnInit {
     this.matDialog
       .open(ConfirmDialogComponent)
       .afterClosed()
-      .subscribe((data) => {
-        console.log(data);
+      .pipe(filter((answer) => answer))
+      // o filter ... filtra se a condição for falsa
+      // o observable não chega no subscribe ( ele ;e finalizado)
+      .subscribe({
+        next: () => {
+          this.productsService.delete(product.id).subscribe(() => {
+            this.getAllProducts();
+          });
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log('complete');
+        },
       });
   }
 }
@@ -43,18 +65,33 @@ export class ListComponent implements OnInit {
 @Component({
   selector: 'app-confirmation-dialog',
   template: `
-    <h2 mat-dialog-title>Excluir produto</h2>
+    <h2 mat-dialog-title>Deletar produto</h2>
     <mat-dialog-content class="mat-typography">
-      <h3>Essa ação não poderá ser desfeita</h3>
+      <h3>Tem certeza que deseja deletar esse produto?</h3>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancelar</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        Confirmar
+      <button mat-button (click)="onDisagree()">Não</button>
+      <button
+        mat-raised-button
+        (click)="onAgree()"
+        color="primary"
+        cdkFocusInitial
+      >
+        Sim
       </button>
     </mat-dialog-actions>
   `,
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })
-export class ConfirmDialogComponent {}
+export class ConfirmDialogComponent {
+  matDialogRef = inject(MatDialogRef);
+
+  onDisagree(): void {
+    this.matDialogRef.close(false);
+  }
+
+  onAgree(): void {
+    this.matDialogRef.close(true);
+  }
+}
