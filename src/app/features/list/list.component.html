@@ -7,7 +7,11 @@
 @if(products){
 <ul>
   @for (product of products; track product.id) {
-  <app-card (onEdit)="onEdit(product.id)" [product]="product"></app-card>
+  <app-card
+    (onDelete)="onDelete(product)"
+    (onEdit)="onEdit(product)"
+    [product]="product"
+  ></app-card>
   }
 </ul>
 }

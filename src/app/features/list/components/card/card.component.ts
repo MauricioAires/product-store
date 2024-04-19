@@ -19,6 +19,7 @@ export class CardComponent {
    */
   product = input.required<Product>();
   onEdit = output<void>();
+  onDelete = output<void>();
 
   productTitle = computed(() => this.product().title);
 }
