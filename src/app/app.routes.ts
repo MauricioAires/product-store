@@ -2,11 +2,16 @@ import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { ListComponent } from './features/list/list.component';
 import { inject } from '@angular/core';
 import { ProductsService } from './shared/services/products.service';
+import { FormControlComponent } from './features/form-control/form-control.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: ListComponent,
+  },
+  {
+    path: 'form-control',
+    component: FormControlComponent,
   },
   {
     path: 'create-product',
