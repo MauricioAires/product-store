@@ -3,6 +3,7 @@ import { ListComponent } from './features/list/list.component';
 import { inject } from '@angular/core';
 import { ProductsService } from './shared/services/products.service';
 import { FormControlComponent } from './features/form-control/form-control.component';
+import { ReactiveFormsComponent } from './features/reactive-forms/reactive-forms.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,10 @@ export const routes: Routes = [
   {
     path: 'form-control',
     component: FormControlComponent,
+  },
+  {
+    path: 'reactive-forms',
+    component: ReactiveFormsComponent,
   },
   {
     path: 'create-product',

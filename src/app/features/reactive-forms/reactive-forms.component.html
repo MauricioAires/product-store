@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="content-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <label for="name"> name </label>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Digite seu nome"
+          formControlName="name"
+        />
+
+        @if(form.controls.name.hasError("required")){
+        <div [ngStyle]="{ color: 'red' }">Nome obrigatório</div>
+        }
+      </fieldset>
+      <br />
+      <button type="submit" [disabled]="form.invalid">Salvar</button>
+    </form>
+  </div>
+</div>
