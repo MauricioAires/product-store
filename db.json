@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": "b95d",
+      "title": "Fone ouvido"
+    },
+    {
+      "id": "fd9a",
+      "title": "Mouse"
+    },
+    {
+      "id": "5837",
+      "title": "Teclado"
+    },
+    {
+      "id": "d610",
+      "title": "Monitor"
+    },
+    {
+      "title": "Iphone 12",
+      "id": "7cc1"
+    }
+  ]
+}
